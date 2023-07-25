@@ -44,10 +44,10 @@ public class PhoneBookMasterController {
         return new ResponseEntity<>(createdId, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
+    @DeleteMapping(value = "/{name}")
     @ResponseBody()
-    public ResponseEntity<Long> deletePhoneBookMaster(@RequestBody final PhoneBookMaster phoneBookMaster) {
-        final Long deletedId = phoneBookMasterService.delete(phoneBookMaster.getName());
+    public ResponseEntity<Long> deletePhoneBookMaster(@PathVariable("name") String name) {
+        final Long deletedId = phoneBookMasterService.delete(name);
         return new ResponseEntity<>(deletedId, HttpStatus.ACCEPTED);
     }
     
