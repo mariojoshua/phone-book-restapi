@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.validation.Valid;
 
 @Component
 @Service
+@Transactional
 public class PhoneBookMasterService {
 
     private final PhoneBookMasterRepository phoneBookMasterRepository;
@@ -29,5 +31,10 @@ public class PhoneBookMasterService {
 
     public Long create(final PhoneBookMaster phoneBookMaster) {
         return phoneBookMasterRepository.save(phoneBookMaster).getId();
+    }
+
+    public Long delete(String name) {
+        System.out.println("came here" + name);
+        return phoneBookMasterRepository.deleteByName(name) ;
     }
 }
