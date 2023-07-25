@@ -6,6 +6,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import jakarta.validation.Valid;
+
 @Component
 @Service
 public class PhoneBookMasterService {
@@ -19,5 +21,13 @@ public class PhoneBookMasterService {
     public List<PhoneBookMaster> findAll() {
         final List<PhoneBookMaster> phoneBookMasters = phoneBookMasterRepository.findAll(Sort.by("id"));
         return phoneBookMasters;
+    }
+
+    public boolean nameExists(String name) {
+        return phoneBookMasterRepository.existsByNameIgnoreCase(name);
+    }
+
+    public Long create(final PhoneBookMaster phoneBookMaster) {
+        return phoneBookMasterRepository.save(phoneBookMaster).getId();
     }
 }
